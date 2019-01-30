@@ -4,10 +4,10 @@ import './App.css';
 class ImageCanvas extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
-  handleClick(event) {
+  handleMouseDown(event) {
       const x = event.x;
       const y = event.y;
       console.log(x, y);
@@ -16,7 +16,7 @@ class ImageCanvas extends Component {
   render() {
     return(
       <div className="canvas">
-        <canvas id="canvas" onClick={(e) => this.handleClick(e.nativeEvent)}>
+        <canvas id="canvas" onMouseDown={(e) => this.handleMouseDown(e.nativeEvent)}>
         </canvas>
       </div>
     )
