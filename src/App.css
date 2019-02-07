@@ -1,25 +1,7 @@
 .App {
   text-align: center;
-}
-
-.canvas {
-  width: 700px;
-  height: 700px;
-  background-color: black;
-  /* border: 3px solid black; */
-}
-
-.image_layer {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  left: 100px;
-  top: 100px;
-  z-index: 0;
-}
-
-.drawing_layer {
-  z-index: 1;
+  /* background-color: black; */
+  border: 3px solid black;
 }
 
 .App-logo {
