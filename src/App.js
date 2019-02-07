@@ -1,29 +1,8 @@
 import React, { Component } from 'react';
 import Konva from 'konva';
+import ProjectImage from './components/ProjectImage'
 import { Stage, Layer, Image } from 'react-konva';
 import './App.css';
-
-class ProjectImage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: null
-    }
-  }
-  componentDidMount() {
-    const image = new window.Image();
-    image.src = 'https://konvajs.github.io/assets/yoda.jpg';
-    image.onload = () => {
-      this.setState({
-        image: image
-      });
-    };
-  }
-
-  render() {
-    return <Image image={this.state.image} height={700} width={700}/>
-  }
-}
 
 class App extends Component {
   constructor(props) {
@@ -57,6 +36,10 @@ class App extends Component {
 
   handleMouseMove = (event) => {
 
+  }
+
+  handleMouseUp = (event) => {
+    
   }
 
   render() {
