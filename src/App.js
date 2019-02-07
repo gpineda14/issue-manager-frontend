@@ -1,42 +1,74 @@
 import React, { Component } from 'react';
+import Konva from 'konva';
+import { Stage, Layer, Image } from 'react-konva';
 import './App.css';
 
-class ImageCanvas extends Component {
+class ProjectImage extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    const image_layer = this.refs.image_layer;
-    const drawing_layer = this.refs.drawing_layer;
-
-    const image_ctx = image_layer.getContext("2d");
-    const drawing_ctx = drawing_layer.getContext("2d");
-
-    const img = new Image();
-    img.src = "https://static.techspot.com/images2/news/bigimage/2018/09/2018-09-04-image-6.png";
-    img.onload = () => {
-      image_ctx.drawImage(img, 0, 0, 500, 500);
+    this.state = {
+      image: null
     }
+  }
+  componentDidMount() {
+    const image = new window.Image();
+    image.src = 'https://konvajs.github.io/assets/yoda.jpg';
+    image.onload = () => {
+      this.setState({
+        image: image
+      });
+    };
   }
 
   render() {
-    return(
-      <div className="canvas">
-        <canvas ref="image_layer" className="image_layer">
-        </canvas>
-        <canvas ref="drawing_layer" className="drawing_layer">
-        </canvas>
-      </div>
-    )
+    return <Image image={this.state.image} height={700} width={700}/>
   }
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mouseDown: false,
+      mouseUp: false,
+      posX: 0,
+      posY: 0,
+      issueCoordinates: []
+    }
+
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+  }
+
+  handleMouseDown = (event) => {
+    if (event.target.className === 'Image') {
+      const stage = event.target.getStage();
+      const mousePos = stage.getPointerPosition();
+      this.setState({
+        mouseDown: true,
+        posX: mousePos.x,
+        posY: mousePos.y
+      });
+      console.log(this.state);
+      return
+    }
+  }
+
+  handleMouseMove = (event) => {
+
+  }
+
   render() {
-    return (
-      <ImageCanvas />
-    )
+    return(
+      <Stage width={700} height={700} onMouseDown={this.handleMouseDown}>
+        <Layer>
+          <ProjectImage />
+        </Layer>
+        <Layer>
+        </Layer>
+      </Stage>
+    );
   }
 }
 
